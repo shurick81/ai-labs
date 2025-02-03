@@ -123,7 +123,7 @@ docker run --rm -it -v $PWD:/usr/src fastai/fastai:2021-02-11 /bin/bash -c pytho
 ```python
 # Load the model that was saved on previous steps
 from fastai.tabular.all import *
-learn = tabular_learner('/usr/src/zeros-ones-00.pkl', '/usr/src/zeros-ones-00.pkl')
+learn = load_learner('/usr/src/zeros-ones-00.pkl')
 
 # Trying the trained model
 test_df = pd.DataFrame([[0,1,0]], columns=['input0', 'input1', 'input2'])
