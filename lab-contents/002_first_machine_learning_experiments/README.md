@@ -169,7 +169,7 @@ Here's ideas what we could add to the labs in the future:
   - audio
   - video
 - generative
-  - text
+  - LLM
   - music
   - voice
   - pictures
