@@ -62,7 +62,7 @@ flowchart TB
 | - | - | - | - | - |
 | Tabular | training and inference | docker | Pytorch, fastai | [Section](#fastai-tabular-training-using-cli) |
 | Tabular | training and inference | docker | Pytorch, fastai, Jupiter | [Section](#fastai-tabular-training-using-jupiter) |
-| LLM | inference | cloud | Gemini 1.5 | [Section](#trying-llm-gemini-1.5) |
+| LLM | inference | cloud | Gemini 1.5 | [Section](#trying-llm-google-gemini-1.5) |
 
 ### fastai Tabular Training Using CLI
 
