@@ -44,12 +44,17 @@ flowchart TB
 
 Prerequisite for using this approach is having installed tools for remote control of Cloud provider such as Azure.
 
+### Using Cloud Provider
+
+Using machine learning 
+
 ## Hands-on Labs
 
 | Problem Class | Training/Inference | Environement | ML Toolset | Experiment |
 | - | - | - | - | - |
 | Tabular | training and inference | docker | Pytorch, fastai | [Section](#fastai-tabular-training-using-cli) |
 | Tabular | training and inference | docker | Pytorch, fastai, Jupiter | [Section](#fastai-tabular-training-using-jupiter) |
+| LLM | inference | cloud | Gemini 1.5 | [Section](#trying-llm-gemini-1.5) |
 
 ### fastai Tabular Training Using CLI
 
@@ -144,7 +149,7 @@ learn.get_preds(dl=dl)
 
 7. Follow more tutorials from https://docs.fast.ai/tutorial.tabular.html
 
-## fastai Tabular Training Using Jupiter
+### fastai Tabular Training Using Jupiter
 
 1. Using Docker on Linux, WSL or Mac, execute fastai container with Jupiter server:
 
@@ -157,6 +162,66 @@ docker run --rm -p 8888:8888 fastai/fastai:2021-02-11 /bin/bash -c "\
 ```
 
 2. Follow one of the tutorials. For example, https://docs.fast.ai/tutorial.tabular.html
+
+### Trying LLM Google Gemini 1.5
+
+```bash
+GOOGLE_API_KEY=<set-key-value>;
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GOOGLE_API_KEY" \
+-H 'Content-Type: application/json' \
+-X POST \
+-d '{
+  "contents": [{
+    "parts":[{"text": "What time is it now?"}]
+    }]
+   }'
+```
+
+### Trying LLM Google Gemini 2.0
+
+```bash
+GOOGLE_API_KEY=<set-key-value>;
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GOOGLE_API_KEY" \
+-H 'Content-Type: application/json' \
+-X POST \
+-d '{
+  "contents": [{
+    "parts":[{"text": "What time is it now in Stockholm?"}]
+    }]
+   }'
+```
+
+### Adding an image to the request
+
+![Picture for analysis](me.jpg)
+
+```bash
+# Downloading a sample image
+curl -o me.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/me.jpg"
+
+# Preparing the prompt
+echo '{
+  "contents":[
+    {
+      "parts":[
+        {"text": "This image contains an image of a man. Describe the picture in a positive way and what makes the man so handsome \
+        {description: description, : [property1, property2, property3, etc]}"},
+        {
+          "inline_data": {
+            "mime_type":"image/jpeg",
+            "data": "'$(base64 -i me.jpg)'"
+          }
+        }
+      ]
+    }
+  ]
+}' > request.json
+
+# Requesting
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GOOGLE_API_KEY" \
+        -H 'Content-Type: application/json' \
+        -d @request.json
+```
 
 ## Ideas for the future
 
