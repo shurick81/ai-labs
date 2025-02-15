@@ -44,9 +44,17 @@ flowchart TB
 
 Prerequisite for using this approach is having installed tools for remote control of Cloud provider such as Azure.
 
-### Using Cloud Provider
+### Using ML Cloud Provider
 
-Using machine learning 
+Machine learning cloud providers allow you using the most powerful models that might be quite impossible for you to run otherwise.
+
+```mermaid
+flowchart TB
+  subgraph provider[ML Cloud Provider]
+    service[ML Service]
+  end
+  laptop-->|API|service
+```
 
 ## Hands-on Labs
 
