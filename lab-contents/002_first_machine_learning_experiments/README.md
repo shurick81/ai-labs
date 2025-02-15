@@ -175,6 +175,10 @@ docker run --rm -p 8888:8888 fastai/fastai:2021-02-11 /bin/bash -c "\
 
 ### Trying LLM Google Gemini 1.5
 
+1. Get a key from https://aistudio.google.com/app/apikey
+
+2. Run a request
+
 ```bash
 GOOGLE_API_KEY=<set-key-value>;
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GOOGLE_API_KEY" \
@@ -188,6 +192,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:g
 ```
 
 ### Trying LLM Google Gemini 2.0
+
+1. Get a key from https://aistudio.google.com/app/apikey
+
+2. Run a request
 
 ```bash
 GOOGLE_API_KEY=<set-key-value>;
