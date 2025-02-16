@@ -6,6 +6,18 @@ If you want to run ML tools and their prerequisites/dependencies in your experim
 
 First, let's go through some methods of executing the ML processes without preliminary installing prerequisites in your physical environment, like Laptop.
 
+### Using ML Cloud Providers
+
+Machine learning cloud providers allow you using the most powerful models that might be quite impossible for you to run otherwise.
+
+```mermaid
+flowchart TB
+  subgraph provider[ML Cloud Provider]
+    service[ML Service]
+  end
+  laptop-->|API|service
+```
+
 ### Using Docker
 
 Use container images that already have such preinstalled software as Python, PyTorch, fastai, Pandas, Jupiter, etc.
@@ -44,27 +56,83 @@ flowchart TB
 
 Prerequisite for using this approach is having installed tools for remote control of Cloud provider such as Azure.
 
-### Using ML Cloud Provider
-
-Machine learning cloud providers allow you using the most powerful models that might be quite impossible for you to run otherwise.
-
-```mermaid
-flowchart TB
-  subgraph provider[ML Cloud Provider]
-    service[ML Service]
-  end
-  laptop-->|API|service
-```
-
 ## Hands-on Labs
 
 | Problem Class | Training/Inference | Environement | ML Toolset | Experiment |
 | - | - | - | - | - |
-| Tabular | training and inference | docker | Pytorch, fastai | [Section](#fastai-tabular-training-using-cli) |
-| Tabular | training and inference | docker | Pytorch, fastai, Jupiter | [Section](#fastai-tabular-training-using-jupiter) |
 | LLM | inference | cloud | Gemini 1.5 | [Section](#trying-llm-google-gemini-15) |
 | LLM | inference | cloud | Gemini 2.0 | [Section](#trying-llm-google-gemini-20) |
 | LLM | prompt with image | cloud | Gemini 2.0 | [Section](#adding-an-image-to-the-request) |
+| Tabular | training and inference | docker | Pytorch, fastai | [Section](#fastai-tabular-training-using-cli) |
+| Tabular | training and inference | docker | Pytorch, fastai, Jupiter | [Section](#fastai-tabular-training-using-jupiter) |
+
+### Trying LLM Google Gemini 1.5
+
+1. Get a key from https://aistudio.google.com/app/apikey
+
+2. Run a request
+
+```bash
+GOOGLE_API_KEY=<set-key-value>;
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GOOGLE_API_KEY" \
+-H 'Content-Type: application/json' \
+-X POST \
+-d '{
+  "contents": [{
+    "parts":[{"text": "What time is it now?"}]
+    }]
+   }'
+```
+
+### Trying LLM Google Gemini 2.0
+
+1. Get a key from https://aistudio.google.com/app/apikey
+
+2. Run a request
+
+```bash
+GOOGLE_API_KEY=<set-key-value>;
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GOOGLE_API_KEY" \
+-H 'Content-Type: application/json' \
+-X POST \
+-d '{
+  "contents": [{
+    "parts":[{"text": "What time is it now in Stockholm?"}]
+    }]
+   }'
+```
+
+### Adding an image to the request
+
+![Picture for analysis](image.jpg)
+
+```bash
+# Downloading a sample image
+curl -o image.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/image.jpg"
+
+# Preparing the prompt
+echo '{
+  "contents":[
+    {
+      "parts":[
+        {"text": "Describe the picture and list different object and activities that happen on the picture and also make predictions what we can expect will happen. Respond in the following format: \
+        {description: description, objects: [object0, object1, object2, etc], activities: [activity0, activity1, activity2, etc], predictions: [prediction0, prediction1, prediction2, etc]}"},
+        {
+          "inline_data": {
+            "mime_type":"image/jpeg",
+            "data": "'$(base64 -i image.jpg)'"
+          }
+        }
+      ]
+    }
+  ]
+}' > request.json
+
+# Requesting
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GOOGLE_API_KEY" \
+        -H 'Content-Type: application/json' \
+        -d @request.json
+```
 
 ### fastai Tabular Training Using CLI
 
@@ -172,74 +240,6 @@ docker run --rm -p 8888:8888 fastai/fastai:2021-02-11 /bin/bash -c "\
 ```
 
 2. Follow one of the tutorials. For example, https://docs.fast.ai/tutorial.tabular.html
-
-### Trying LLM Google Gemini 1.5
-
-1. Get a key from https://aistudio.google.com/app/apikey
-
-2. Run a request
-
-```bash
-GOOGLE_API_KEY=<set-key-value>;
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GOOGLE_API_KEY" \
--H 'Content-Type: application/json' \
--X POST \
--d '{
-  "contents": [{
-    "parts":[{"text": "What time is it now?"}]
-    }]
-   }'
-```
-
-### Trying LLM Google Gemini 2.0
-
-1. Get a key from https://aistudio.google.com/app/apikey
-
-2. Run a request
-
-```bash
-GOOGLE_API_KEY=<set-key-value>;
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GOOGLE_API_KEY" \
--H 'Content-Type: application/json' \
--X POST \
--d '{
-  "contents": [{
-    "parts":[{"text": "What time is it now in Stockholm?"}]
-    }]
-   }'
-```
-
-### Adding an image to the request
-
-![Picture for analysis](image.jpg)
-
-```bash
-# Downloading a sample image
-curl -o image.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/image.jpg"
-
-# Preparing the prompt
-echo '{
-  "contents":[
-    {
-      "parts":[
-        {"text": "Describe the picture and list different object and activities that happen on the picture and also make predictions what we can expect will happen. Respond in the following format: \
-        {description: description, objects: [object0, object1, object2, etc], activities: [activity0, activity1, activity2, etc], predictions: [prediction0, prediction1, prediction2, etc]}"},
-        {
-          "inline_data": {
-            "mime_type":"image/jpeg",
-            "data": "'$(base64 -i image.jpg)'"
-          }
-        }
-      ]
-    }
-  ]
-}' > request.json
-
-# Requesting
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$GOOGLE_API_KEY" \
-        -H 'Content-Type: application/json' \
-        -d @request.json
-```
 
 ## Ideas for the future
 
