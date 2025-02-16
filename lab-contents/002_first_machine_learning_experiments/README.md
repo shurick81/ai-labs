@@ -215,19 +215,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:g
 
 ```bash
 # Downloading a sample image
-curl -o me.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/me.jpg"
+curl -o me.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/image.jpg"
 
 # Preparing the prompt
 echo '{
   "contents":[
     {
       "parts":[
-        {"text": "This image contains an image of a man. Describe the picture in a positive way and what makes the man so handsome \
-        {description: description, : [property1, property2, property3, etc]}"},
+        {"text": "Describe the picture and list different object and activities that happen on the picture and also make predictions what we can expect will happen. Respond in the following format: \
+        {description: description, objects: [object0, object1, object2, etc], activities: [activity0, activity1, activity2, etc], predictions: [prediction0, prediction1, prediction2, etc]}"},
         {
           "inline_data": {
             "mime_type":"image/jpeg",
-            "data": "'$(base64 -i me.jpg)'"
+            "data": "'$(base64 -i image.jpg)'"
           }
         }
       ]
