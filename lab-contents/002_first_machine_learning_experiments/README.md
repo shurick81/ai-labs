@@ -211,11 +211,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:g
 
 ### Adding an image to the request
 
-![Picture for analysis](me.jpg)
+![Picture for analysis](image.jpg)
 
 ```bash
 # Downloading a sample image
-curl -o me.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/image.jpg"
+curl -o image.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/image.jpg"
 
 # Preparing the prompt
 echo '{
