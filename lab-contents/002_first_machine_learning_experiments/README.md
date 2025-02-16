@@ -136,6 +136,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:g
 
 ### fastai Tabular Training Using CLI
 
+Imagine that you want to teach a device to turn on a warning signal of a car seatbelt.
+
+- First input to consider could be whether the seatbelt is fastened or not.
+- Second input could be whether the car is in motion or not.
+- Third input could be whether the destination point is set in the navigation system.
+
+The latter input should not play any role and we want to see that the after we train the model it will not affect the prediction.
+
+The fourth column in the training data is the decision whether the warning signal should be on or off.
+
 1. Using Docker on Linux, WSL or Mac, run
 
 ```bash
