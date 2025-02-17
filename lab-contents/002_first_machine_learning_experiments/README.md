@@ -15,7 +15,7 @@ flowchart TB
   subgraph provider[ML Cloud Provider]
     service[ML Service]
   end
-  laptop-->|API|service
+  laptop-->|Calling API|service
 ```
 
 ### Using Docker
