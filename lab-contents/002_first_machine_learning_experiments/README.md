@@ -58,19 +58,19 @@ Prerequisite for using this approach is having installed tools for remote contro
 
 ## Hands-on Labs
 
-| Problem Class | Training/Inference | Environement | ML Toolset | Experiment |
-| - | - | - | - | - |
-| LLM | inference | cloud | Gemini 1.5 | [Section](#trying-llm-google-gemini-15) |
-| LLM | inference | cloud | Gemini 2.0 | [Section](#trying-llm-google-gemini-20) |
-| LLM | prompt with image | cloud | Gemini 2.0 | [Section](#adding-an-image-to-the-request) |
-| Tabular | training and inference | docker | Pytorch, fastai | [Section](#fastai-tabular-training-using-cli) |
-| Tabular | training and inference | docker | Pytorch, fastai, Jupiter | [Section](#fastai-tabular-training-using-jupiter) |
+| Problem Class | Training/Inference     | Environement | ML Toolset               | Experiment                                        |
+| -             | -                      | -            | -                        | -                                                 |
+| LLM           | inference              | cloud        | Gemini 1.5               | [Section](#trying-llm-google-gemini-15)           |
+| LLM           | inference              | cloud        | Gemini 2.0               | [Section](#trying-llm-google-gemini-20)           |
+| LLM           | prompt with image      | cloud        | Gemini 2.0               | [Section](#adding-an-image-to-the-request)        |
+| Tabular       | training and inference | docker       | Pytorch, fastai          | [Section](#fastai-tabular-training-using-cli)     |
+| Tabular       | training and inference | docker       | Pytorch, fastai, Jupiter | [Section](#fastai-tabular-training-using-jupiter) |
 
 ### Trying LLM Google Gemini 1.5
 
 1. Get a key from https://aistudio.google.com/app/apikey
 
-2. Run a request
+2. Run a request:
 
 ```bash
 GOOGLE_API_KEY=<set-key-value>;
@@ -88,7 +88,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:g
 
 1. Get a key from https://aistudio.google.com/app/apikey
 
-2. Run a request
+2. Run a request:
 
 ```bash
 GOOGLE_API_KEY=<set-key-value>;
@@ -107,6 +107,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:g
 ![Picture for analysis](image.jpg)
 
 ```bash
+GOOGLE_API_KEY=<set-key-value>;
 # Downloading a sample image
 curl -o image.jpg "https://github.com/downloads/shurick81/ai-labs/lab-contents/002_first_machine_learning_experiments/image.jpg"
 
@@ -146,7 +147,7 @@ The latter input should not play any role and we want to see that the after we t
 
 The fourth column in the training data is the decision whether the warning signal should be on or off.
 
-1. Using Docker on Linux, WSL or Mac, run
+1. Using Docker on Linux, WSL or Mac, run:
 
 ```bash
 docker run --rm -it -v $PWD:/usr/src fastai/fastai:2021-02-11 /bin/bash -c python
@@ -197,7 +198,7 @@ learn.export('/usr/src/zeros-ones-00.pkl')
 
 3. Ctrl + D to exit the container.
 
-4. Verify that the new file, `zeros-ones-00.pkl`, is created
+4. Verify that the new file, `zeros-ones-00.pkl`, is created:
 
 ```bash
 ls -lh
@@ -205,13 +206,13 @@ ls -lh
 
 Check the size of the `zeros-ones-00.pkl` file.
 
-5. Create a new container again
+5. Create a new container again:
 
 ```bash
 docker run --rm -it -v $PWD:/usr/src fastai/fastai:2021-02-11 /bin/bash -c python
 ```
 
-6. Run the following Python code
+6. Run the following Python code:
 
 ```python
 # Load the model that was saved on previous steps
