@@ -1,6 +1,8 @@
+# Image Classification with PyTorch and Docker
+
 The only prerequisite for this lab is Docker running. You do NOT need to have installed Python or anything like this in your dev environment.
 
-# Build a local docker image and run a container
+## Build a local docker image and run a container
 
 ```bash
 cat <<'EOF' | tee Dockerfile
@@ -25,7 +27,7 @@ In the Notebook section click on the Python 3 tile. You should see something lik
 
 Run further Python code in the Jupyter lab.
 
-# Prepare data for training
+## Prepare data for training
 
 First, configure the session to show entire output from the Jupyter cells, instead of showing only output of the last line:
 
@@ -99,7 +101,7 @@ You should be able to see some samples of the training pictures before and after
 
 In this lab we are using CIFAR 10 training set with 50000 training 32x32 images, each associated with one of ten classes.
 
-# Train the model
+## Train the model
 
 Next step is to do the training:
 
@@ -166,7 +168,7 @@ trainer = Trainer(max_epochs=1, devices=1, accelerator="auto")
 trainer.fit(model, train_loader, val_loader)
 ```
 
-# Try it out
+## Try it out
 
 Now when the model got some training, we can test it out!
 
@@ -219,6 +221,8 @@ with torch.no_grad():
     predicted_class = logits.argmax(dim=1).item()
 print("Predicted Class:", train_data.classes[predicted_class])
 ```
+
+## Evaluation
 
 Does the classification work? Let's measure!
 
