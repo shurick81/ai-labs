@@ -52,6 +52,7 @@ from torchvision.transforms import ToPILImage
 from PIL import Image
 import pytorch_lightning as pl
 from pytorch_lightning import Trainer
+from torchmetrics.classification import Accuracy
 
 # Step 1: Dataset Exploration
 
@@ -77,9 +78,7 @@ sample_data.classes[sample_data[2][1]]
 transform_train = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.4914, 0.4822, 0.4465],
-                         std=[0.2023, 0.1994, 0.2010])
+    transforms.ToTensor()
 ])
 # Download and load CIFAR-10 dataset
 train_data = datasets.CIFAR10(root="data", train=True, download=True, transform=transform_train)
@@ -116,6 +115,7 @@ class ImageClassifier(pl.LightningModule):
         self.conv2 = nn.Conv2d(32, 64, 3, 1)
         self.fc1 = nn.Linear(64 * 6 * 6, 128)
         self.fc2 = nn.Linear(128, 10)
+        self.test_accuracy = Accuracy(task="multiclass", num_classes=10)
     
     def forward(self, x):
         x = F.relu(self.conv1(x))
@@ -134,30 +134,19 @@ class ImageClassifier(pl.LightningModule):
         self.log('train_loss', loss)
         return loss
 
-    # Validation step 
-    def validation_step(self, batch, batch_idx):
-        inputs, labels = batch
-        outputs = self(inputs)
-        val_loss = F.nll_loss(outputs, labels)
-        self.log('val_loss', val_loss)
-        return val_loss
-    
     def test_step(self, batch, batch_idx):
         inputs, labels = batch
         outputs = self(inputs)
-        test_loss = F.cross_entropy(outputs, labels)
-        self.log('test_loss', test_loss, prog_bar=True)
-        return test_loss
+        test_loss = F.nll_loss(outputs, labels)
+        acc = self.test_accuracy(outputs, labels)  # <- Accuracy here
+        self.log("test_loss", test_loss)
+        self.log("test_accuracy", acc)
+        return {"loss": test_loss, "accuracy": acc}
 
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=0.001)
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.5)
         return [optimizer], [scheduler]
-
-# Step 4: Training and Validation
-
-val_data = datasets.CIFAR10(root="data", train=False, download=True, transform=transform_train)
-val_loader = DataLoader(val_data, batch_size=64, shuffle=False, num_workers=7)
 
 # Initialize the model
 model = ImageClassifier()
@@ -165,7 +154,7 @@ model = ImageClassifier()
 # Create a Trainer object
 trainer = Trainer(max_epochs=1, devices=1, accelerator="auto")
 # Train the model
-trainer.fit(model, train_loader, val_loader)
+trainer.fit(model, train_loader)
 ```
 
 ## Try it out
@@ -175,6 +164,15 @@ Now when the model got some training, we can test it out!
 ```py
 # Looking at the non-seen data (train=False)
 sample_data = datasets.CIFAR10(root="data", train=False, download=True)
+
+transform_test = transforms.Compose([
+    transforms.RandomCrop(32, padding=4),
+    transforms.RandomHorizontalFlip(),
+    transforms.ToTensor()
+])
+
+val_data = datasets.CIFAR10(root="data", train=False, download=True, transform=transform_test)
+val_loader = DataLoader(val_data, batch_size=64, shuffle=False, num_workers=7)
 
 # first image
 sample_data[0][0].resize([300, 300])
@@ -230,21 +228,21 @@ Does the classification work? Let's measure!
 trainer.test(model, val_loader)
 ```
 
-Test loss between 1.2 - 1.4 is expected.
+Test loss between 1.2 - 1.4 and accuracy between 0.4 and 0.7 might be expected.
 
-Test loss around 2.3 for the prediction among 10 classes would mean that the model is answering randomly, it is not trained at all.
+Test loss around 2.3 for the prediction among 10 classes would mean that the model is answering randomly, it is not trained at all. Accuracy would be around 0.1 in this case so in average the model would guess the correct class in 10% of the queries.
 
 For improving results, run training in many iterations:
 
 ```py
-trainer = Trainer(max_epochs=10, devices=1, accelerator="auto")
-trainer.fit(model, train_loader, val_loader)
+trainer = Trainer(max_epochs=25, devices=1, accelerator="auto")
+trainer.fit(model, train_loader)
 trainer.test(model, val_loader)
 ```
 
 What does the test loss look now?
 
-Since training can be time consuming, perhaps you would like to save the results, the weights of the model after training so you can continue using them even after shutting down the container. Use the following commands:
+Since training can be time consuming, perhaps you would like to save the results, the weights of the model after training so you can continue using them even after shutting down the container. Use the following commands for saving files to the VM disk:
 
 ```py
 # Save the model
@@ -253,3 +251,13 @@ trainer.save_checkpoint("cifar10_model00.ckpt")
 # Load the model
 model = ImageClassifier.load_from_checkpoint("cifar10_model00.ckpt")
 ```
+
+Here's some example of the time that it takes to train a model:
+
+- Hardware: Macbook Air M2
+- Epochs: 25
+- Time taken: 8 min 40 sec (520 sec)
+- Prediction Accuracy: 0.7
+- Test Loss: 0.87
+
+If such training seems like too long to wait, consider using more powerfull resources, for example GPU-enabled cloud VMs.
