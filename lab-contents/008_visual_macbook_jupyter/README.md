@@ -1,6 +1,10 @@
-# Image recognition using a Macbook
+# Image recognition using local hardware
 
 ## Prerequsites
+
+### Macbook
+
+#### Python
 
 ```sh
 # Install brew if you don't have it yet
@@ -12,8 +16,14 @@ cd
 touch .zshrc
 echo export PATH=$PATH:/opt/homebrew/bin -> .zshrc
 
-brew install python@3.9.21
+brew install python@3.13
+```
 
+#### Other prereqs
+
+##### Option #1, using conda
+
+```sh
 curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
 sh Miniconda3-latest-MacOSX-arm64.sh
 ```
@@ -24,8 +34,25 @@ rerun terminal
 conda install pytorch torchvision torchaudio -c pytorch-nightly
 conda install conda-forge::pytorch-lightning
 conda install jupyterlab
-python
 ```
+
+##### Option #2, using pip
+
+```sh
+python3 -m ensurepip --upgrade
+pip3 install torchvision==0.21.0
+pip3 install lightning==2.5.0
+pip3 install lightning[extra]
+pip3 install jupyterlab==4.3.6
+export PATH=$HOME/Library/Python/3.9/lib/python/site-packages:$PATH
+```
+
+## Run
+
+```sh
+python3
+```
+
 
 ```py
 import torch
@@ -36,6 +63,9 @@ if torch.backends.mps.is_available():
 else:
     print ("MPS device not found.")
 ```
+
+`Ctrl` + `D`
+
 
 ```sh
 jupyter lab
@@ -244,43 +274,6 @@ trainer.save_checkpoint("cifar10_model00.ckpt")
 
 # Load the model
 model = ImageClassifier.load_from_checkpoint("cifar10_model00.ckpt")
-```
-
-These are bash commands for copying between the Azure Cloud Shell and the VM:
-
-```bash
-# list files in the current directory
-az ssh vm --resource-group ai-labs-00 --name small_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "ls /home/admin98475897"
-```
-
-```bash
-# copy the checkpoint file from the VM to Azure Cloud Shell
-vm_ip_address=$(az vm list-ip-addresses --resource-group ai-labs-00 --name small_nvidia --query [].virtualMachine.network.publicIpAddresses[].ipAddress -o tsv);
-az ssh vm --resource-group ai-labs-00 --name small_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "sudo chown admin98475897:admin98475897 /home/admin98475897/cifar10_model00.ckpt"
-scp -i ~/.ssh/id_rsa.pem admin98475897@$vm_ip_address:/home/admin98475897/cifar10_model00.ckpt .
-```
-
-```bash
-# Back from the Azure Cloud Shell to the VM:
-vm_ip_address=$(az vm list-ip-addresses --resource-group ai-labs-00 --name small_nvidia --query [].virtualMachine.network.publicIpAddresses[].ipAddress -o tsv);
-scp -i ~/.ssh/id_rsa.pem cifar10_model00.ckpt admin98475897@$vm_ip_address:/home/admin98475897/
-```
-
-Treating the VM as a disposable compute resource, delete it as soon as you don't need compute power, so it does not cost you more than necessary:
-
-```bash
-az vm delete \
-  --resource-group ai-labs-00 \
-  --name small_nvidia \
-  -y;
-```
-
-In some cases, when you have files that only saved on the VM, you might want to stop it without deleting:
-
-```bash
-az vm deallocate \
-  --resource-group ai-labs-00 \
-  --name small_nvidia;
 ```
 
 Here's some example of the time that it takes to train a model:
