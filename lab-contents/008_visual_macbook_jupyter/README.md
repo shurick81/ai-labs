@@ -1,4 +1,4 @@
-# Image recognition using Macbook
+# Image Classification with Pytorch on Macbook
 
 ## Prerequsites
 
