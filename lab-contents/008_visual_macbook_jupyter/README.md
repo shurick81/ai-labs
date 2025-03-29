@@ -1,14 +1,26 @@
-# Image recognition using local hardware
+# Image recognition using Macbook
 
 ## Prerequsites
 
-### Macbook
-
-#### Python
-
-Install brew if you have not installed it yet
+### Option #1, using conda
 
 ```sh
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-py312_25.1.1-2-MacOSX-arm64.sh
+sh Miniconda3-py312_25.1.1-2-MacOSX-arm64.sh
+```
+
+rerun terminal, then run
+
+```sh
+conda install python=3.12.9 pytorch::pytorch=2.5.1 pytorch::torchvision=0.20.1
+conda install conda-forge::pytorch-lightning=2.5.1
+conda install jupyterlab=4.3.4
+```
+
+### Option #2, using brew and pip
+
+```sh
+#Install brew if you have not installed it yet
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 cd /opt/homebrew/bin/
 ls
@@ -17,34 +29,13 @@ cd
 touch .zshrc
 echo export PATH=$PATH:/opt/homebrew/bin -> .zshrc
 
-brew install python@3.11
-```
+#Install remaining prereqs:
+brew install python@3.12
 
-#### Other prereqs
-
-##### Option #1, using conda
-
-```sh
-curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
-sh Miniconda3-latest-MacOSX-arm64.sh
-```
-
-rerun terminal
-
-```sh
-conda install pytorch torchvision torchaudio -c pytorch-nightly
-conda install conda-forge::pytorch-lightning
-conda install jupyterlab
-```
-
-##### Option #2, using pip
-
-```sh
-pip install torchvision==0.21.0
-pip install lightning==2.5.0
-pip install lightning[extra]
-pip install jupyterlab==4.3.6
-export PATH=$HOME/Library/Python/3.9/lib/python/site-packages:$PATH
+pip3 install torchvision==0.21.0
+pip3 install lightning==2.5.0
+pip3 install lightning[extra]
+pip3 install jupyterlab==4.3.6
 ```
 
 ## Run
@@ -52,7 +43,6 @@ export PATH=$HOME/Library/Python/3.9/lib/python/site-packages:$PATH
 ```sh
 python3
 ```
-
 
 ```py
 import torch
@@ -65,7 +55,6 @@ else:
 ```
 
 `Ctrl` + `D`
-
 
 ```sh
 jupyter lab
