@@ -12,7 +12,7 @@ RUN pip install lightning==2.5.0
 RUN pip install lightning[extra]
 RUN pip install jupyterlab==4.3.6
 EOF
-docker build --progress=plain --no-cache . -t torch-vision
+docker buildx build --platform=linux/arm64 --progress=plain --no-cache . -t torch-vision
 
 docker run -it --rm -v $PWD:/usr/src -p 8888:8888 torch-vision /bin/bash -c "jupyter lab --notebook-dir=/usr/src --ip='*' --allow-root"
 ```
@@ -105,7 +105,7 @@ In this lab we are using CIFAR 10 training set with 50000 training 32x32 images,
 Next step is to do the training:
 
 ```py
-train_loader = DataLoader(train_data, batch_size=64, shuffle=True, num_workers=7)
+train_loader = DataLoader(train_data, batch_size=64, shuffle=True, num_workers=7, persistent_workers=True)
 
 # Step 3: Define the Image Classification Model
 class ImageClassifier(pl.LightningModule):
@@ -259,5 +259,11 @@ Here's some example of the time that it takes to train a model:
 - Time taken: 8 min 40 sec (520 sec)
 - Prediction Accuracy: 0.7
 - Test Loss: 0.87
+
+- Hardware: Macbook Air M4
+- Epochs: 25
+- Time taken: 6 min 14 sec (374 sec)
+- Prediction Accuracy: 0.7
+- Test Loss: 0.86
 
 If such training seems like too long to wait, consider using more powerfull resources, for example GPU-enabled cloud VMs.
