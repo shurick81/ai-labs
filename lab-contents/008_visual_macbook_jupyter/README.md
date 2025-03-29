@@ -32,10 +32,12 @@ echo export PATH=$PATH:/opt/homebrew/bin -> .zshrc
 #Install remaining prereqs:
 brew install python@3.12
 
+pip3 install torch==2.6.0
 pip3 install torchvision==0.21.0
 pip3 install lightning==2.5.0
-pip3 install lightning[extra]
+pip3 install "lightning[extra]"
 pip3 install jupyterlab==4.3.6
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 ```
 
 ## Run
@@ -147,7 +149,7 @@ In this lab we are using CIFAR 10 training set with 50000 training 32x32 images,
 Next step is to do the training:
 
 ```py
-train_loader = DataLoader(train_data, batch_size=64, shuffle=True, num_workers=4)
+train_loader = DataLoader(train_data, batch_size=64, shuffle=True, num_workers=4, persistent_workers=True)
 
 # Step 3: Define the Image Classification Model
 class ImageClassifier(pl.LightningModule):
@@ -173,7 +175,7 @@ class ImageClassifier(pl.LightningModule):
         inputs, labels = batch
         outputs = self(inputs)
         loss = F.nll_loss(outputs, labels)
-        self.log('train_loss', loss, sync_dist=True)
+        self.log('train_loss', loss)
         return loss
 
     def test_step(self, batch, batch_idx):
@@ -181,8 +183,8 @@ class ImageClassifier(pl.LightningModule):
         outputs = self(inputs)
         test_loss = F.nll_loss(outputs, labels)
         acc = self.test_accuracy(outputs, labels)  # <- Accuracy here
-        self.log('test_loss', test_loss, sync_dist=True)
-        self.log('test_accuracy', acc, sync_dist=True)
+        self.log('test_loss', test_loss)
+        self.log('test_accuracy', acc)
         return {'loss': test_loss, 'accuracy': acc}
 
     def configure_optimizers(self):
@@ -194,7 +196,7 @@ class ImageClassifier(pl.LightningModule):
 model = ImageClassifier()
 
 # Create a Trainer object
-trainer = Trainer(max_epochs=25, devices=1, accelerator="gpu")
+trainer = Trainer(max_epochs=25, devices=1, accelerator="mps")
 # Train the model
 trainer.fit(model, train_loader)
 ```
@@ -248,7 +250,7 @@ Test loss around 2.3 for the prediction among 10 classes would mean that the mod
 For improving results, run training in many iterations:
 
 ```py
-trainer = Trainer(max_epochs=100, devices=4, accelerator="gpu")
+trainer = Trainer(max_epochs=100, devices=4, accelerator="mps")
 trainer.fit(model, train_loader)
 trainer.test(model, val_loader)
 ```
@@ -269,6 +271,6 @@ Here's some example of the time that it takes to train a model:
 
 - Hardware: Macbook Air M4
 - Epochs: 25
-- Time taken: 11 min 48 sec
+- Time taken: 2 min 20 sec (140 sec)
 - Prediction Accuracy: 0.7
 - Test Loss: 0.88
