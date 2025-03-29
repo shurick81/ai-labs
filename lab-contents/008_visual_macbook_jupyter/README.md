@@ -6,8 +6,9 @@
 
 #### Python
 
+Install brew if you have not installed it yet
+
 ```sh
-# Install brew if you don't have it yet
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 cd /opt/homebrew/bin/
 ls
@@ -16,7 +17,7 @@ cd
 touch .zshrc
 echo export PATH=$PATH:/opt/homebrew/bin -> .zshrc
 
-brew install python@3.13
+brew install python@3.11
 ```
 
 #### Other prereqs
@@ -39,11 +40,10 @@ conda install jupyterlab
 ##### Option #2, using pip
 
 ```sh
-python3 -m ensurepip --upgrade
-pip3 install torchvision==0.21.0
-pip3 install lightning==2.5.0
-pip3 install lightning[extra]
-pip3 install jupyterlab==4.3.6
+pip install torchvision==0.21.0
+pip install lightning==2.5.0
+pip install lightning[extra]
+pip install jupyterlab==4.3.6
 export PATH=$HOME/Library/Python/3.9/lib/python/site-packages:$PATH
 ```
 
