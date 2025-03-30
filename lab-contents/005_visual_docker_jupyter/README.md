@@ -14,7 +14,7 @@ RUN pip install jupyterlab==4.3.6
 EOF
 docker buildx build --platform=linux/arm64 --progress=plain --no-cache . -t torch-vision
 
-docker run -it --rm -v $PWD:/usr/src -p 8888:8888 torch-vision /bin/bash -c "jupyter lab --notebook-dir=/usr/src --ip='*' --allow-root"
+docker run --rm -v $PWD:/usr/src -p 8888:8888 torch-vision /bin/bash -c "jupyter lab --notebook-dir=/usr/src --ip='*' --allow-root"
 ```
 
 In the output, find the Jupyter Lab page (for example, http://localhost:8888/lab?token=497a91de59e60f9441d6a6c22125155d4004e627ef5d199a) and open it in a browser.
