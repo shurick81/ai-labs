@@ -72,3 +72,4 @@ Prerequisite for using this approach is having installed tools for remote contro
 | visual        | training and inference | docker       | PyTorch Lightning, Jupiter | [Page](lab-contents/005_visual_docker_jupyter)     |
 | visual        | training and inference | cloud VM     | PyTorch Lightning, Jupiter | [Page](lab-contents/006_visual_azure_jupyter)      |
 | visual        | training and inference | cloud VM     | PyTorch Lightning, CLI | [Page](lab-contents/007_visual_azure_cli)      |
+| visual        | training and inference | Macbook      | PyTorch Lightning, Jupiter | [Page](lab-contents/008_visual_macbook_jupyter)      |
