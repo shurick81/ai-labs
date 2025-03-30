@@ -187,7 +187,7 @@ az network nsg rule create \
 end_time=$(date +%s.%N)  # Capture end time
 elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
 echo "Elapsed time: $elapsed_time seconds"
-# 65-80 sec
+# 65-115 sec
 vm_ip_address=$(az vm list-ip-addresses --resource-group ai-labs-00 --name small_nvidia --query [].virtualMachine.network.publicIpAddresses[].ipAddress -o tsv);
 ssh-keygen -R $vm_ip_address;
 az ssh vm --resource-group ai-labs-00 --name small_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "sudo usermod -aG docker admin98475897";
@@ -203,7 +203,6 @@ az ssh vm --resource-group ai-labs-00 --name small_nvidia --local-user admin9847
 copy paste the URL from the output of the previous command, for example: http://hostname:8888/?token=305b042aa2ab27151903ebb644598bd20aedc8dedce8f1a1, to the browser and replace the `hostname` with IP address. It would look like this:
 
 http://4.211.83.160:8888/?token=305b042aa2ab27151903ebb644598bd20aedc8dedce8f1a1
-
 
 ![Jupyter Lab Homepage](jupyter-lab-home.png)
 
@@ -447,7 +446,7 @@ az vm deallocate \
 
 Here's some example of the time that it takes to train a model:
 
-- Hardware: T4
+- Hardware: Standard_NC64as_T4_v3 Azure VM, 4 x T4 Nvidia Tesla T4 GPU (16GB)
 - Epochs: 25
 - Time taken: 141 sec
 - Prediction Accuracy: 0.7
