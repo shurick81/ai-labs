@@ -137,7 +137,7 @@ FROM nvcr.io/nvidia/pytorch:25.02-py3
 RUN pip install lightning==2.5.0
 RUN pip install lightning[extra]
 EOF
-docker build --progress=plain --no-cache . -t nvcr.io-nvidia-pytorch-25.02-py3-lightning-2.5.0"
+docker buildx build --platform=linux/amd64 --progress=plain --no-cache . -t nvcr.io-nvidia-pytorch-25.02-py3-lightning-2.5.0"
 end_time=$(date +%s.%N)  # Capture end time
 elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
 echo "Elapsed time: $elapsed_time seconds"
