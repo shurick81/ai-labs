@@ -254,16 +254,18 @@ model = ImageClassifier.load_from_checkpoint("cifar10_model00.ckpt")
 
 Here's some example of the time that it takes to train a model:
 
-- Hardware: Macbook Air M2
-- Epochs: 25
-- Time taken: 8 min 40 sec (520 sec)
-- Prediction Accuracy: 0.7
-- Test Loss: 0.87
+- Stand #1
+    - Hardware: Macbook Air M2
+    - Epochs: 25
+    - Time taken: 8 min 40 sec (520 sec)
+    - Prediction Accuracy: 0.7
+    - Test Loss: 0.87
 
-- Hardware: Macbook Air M4
-- Epochs: 25
-- Time taken: 6 min 14 sec (374 sec)
-- Prediction Accuracy: 0.7
-- Test Loss: 0.86
+- Stand #2
+    - Hardware: Macbook Air M4
+    - Epochs: 25
+    - Time taken: 6 min 14 sec (374 sec)
+    - Prediction Accuracy: 0.7
+    - Test Loss: 0.86
 
 If such training seems like too long to wait, consider using more powerfull resources, for example GPU-enabled cloud VMs.
