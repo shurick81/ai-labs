@@ -176,14 +176,6 @@ az vm create \
   --os-disk-delete-option Delete \
   --admin-username admin98475897 \
   --ssh-key-values ~/.ssh/id_rsa.pem.pub;
-az network nsg rule create \
-  --resource-group ai-labs-00 \
-  --nsg-name small_nvidiaNSG \
-  --name AllowJupyterServer \
-  --protocol tcp \
-  --priority 1001 \
-  --destination-port-range 8888 \
-  --access allow
 end_time=$(date +%s.%N)  # Capture end time
 elapsed_time=$(awk "BEGIN {print $end_time - $start_time}")
 echo "Elapsed time: $elapsed_time seconds"
@@ -210,6 +202,8 @@ import pytorch_lightning as pl
 from pytorch_lightning import Trainer
 from torchmetrics.classification import Accuracy
 
+pl.seed_everything(42)
+
 transform_train = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
@@ -228,14 +222,21 @@ to_img(train_data[1][0]).resize([300, 300])
 #third image after transformation
 to_img(train_data[2][0]).resize([300, 300])
 
-train_loader = DataLoader(train_data, batch_size=16, shuffle=True, num_workers=4, persistent_workers=True)
+train_loader = DataLoader(
+    train_data,
+    batch_size=64,         # Increased batch size
+    shuffle=True,
+    num_workers=8,
+    pin_memory=True,
+    persistent_workers=True
+)
 
 # Step 3: Define the Image Classification Model
 class ImageClassifier(pl.LightningModule):
     def __init__(self):
         super(ImageClassifier, self).__init__()
         self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1)
-        self.conv2 = nn.Conv2d(32, 64, 3, 1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1)
         self.fc1 = nn.Linear(64 * 6 * 6, 128)
         self.fc2 = nn.Linear(128, 10)
         self.test_accuracy = Accuracy(task="multiclass", num_classes=10)
@@ -254,7 +255,7 @@ class ImageClassifier(pl.LightningModule):
         inputs, labels = batch
         outputs = self(inputs)
         loss = F.nll_loss(outputs, labels)
-        self.log("test_loss", loss, sync_dist=True)
+        self.log("train_loss", loss, sync_dist=True)
         return loss
 
     def test_step(self, batch, batch_idx):
@@ -267,7 +268,7 @@ class ImageClassifier(pl.LightningModule):
         return {"loss": test_loss, "accuracy": acc}
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=0.001)
+        optimizer = torch.optim.Adam(self.parameters(), lr=0.004)
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.5)
         return [optimizer], [scheduler]
 
@@ -284,7 +285,7 @@ transform_test = transforms.Compose([
 ])
 
 val_data = datasets.CIFAR10(root="data", train=False, download=True, transform=transform_test)
-val_loader = DataLoader(val_data, batch_size=16, shuffle=False, num_workers=4)
+val_loader = DataLoader(val_data, batch_size=256, shuffle=False, num_workers=8)
 
 trainer.fit(model, train_loader)
 trainer.test(model, val_loader)
@@ -292,7 +293,7 @@ trainer.test(model, val_loader)
 #Save the training results in file:
 trainer.save_checkpoint("cifar10_model00.ckpt")
 '
-az ssh vm --resource-group ai-labs-00 --name small_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem 'docker run --rm -v $PWD:/usr/src -p 8888:8888 --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 nvcr.io-nvidia-pytorch-25.02-py3-lightning-2.5.0 python /usr/src/learner.py'
+az ssh vm --resource-group ai-labs-00 --name small_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem 'docker run --rm -v $PWD:/usr/src --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 nvcr.io-nvidia-pytorch-25.02-py3-lightning-2.5.0 python /usr/src/learner.py'
 
 # copy the checkpoint file from the VM to Azure Cloud Shell
 vm_ip_address=$(az vm list-ip-addresses --resource-group ai-labs-00 --name small_nvidia --query [].virtualMachine.network.publicIpAddresses[].ipAddress -o tsv);
@@ -327,6 +328,6 @@ Here's some example of the time that it takes to train a model:
 
 - Hardware: Standard_NC64as_T4_v3 Azure VM, 4 x T4 Nvidia Tesla T4 GPU (16GB)
 - Epochs: 25
-- Time taken: 136 sec
-- Prediction Accuracy: 0.7
-- Test Loss: 0.87
+- Time taken: 26 sec
+- Prediction Accuracy: 0.65
+- Test Loss: 0.95

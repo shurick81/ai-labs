@@ -239,6 +239,8 @@ import pytorch_lightning as pl
 from pytorch_lightning import Trainer
 from torchmetrics.classification import Accuracy
 
+pl.seed_everything(42)
+
 # Step 1: Dataset Exploration
 
 # load dataset
@@ -289,14 +291,20 @@ In this lab we are using CIFAR 10 training set with 50000 training 32x32 images,
 Next step is to do the training:
 
 ```py
-train_loader = DataLoader(train_data, batch_size=16, shuffle=True, num_workers=4, persistent_workers=True)
+train_loader = DataLoader(
+    train_data,
+    batch_size=64,         # Increased batch size
+    shuffle=True,
+    num_workers=8,
+    pin_memory=True,
+    persistent_workers=True
+)
 
-# Step 3: Define the Image Classification Model
 class ImageClassifier(pl.LightningModule):
     def __init__(self):
         super(ImageClassifier, self).__init__()
         self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1)
-        self.conv2 = nn.Conv2d(32, 64, 3, 1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1)
         self.fc1 = nn.Linear(64 * 6 * 6, 128)
         self.fc2 = nn.Linear(128, 10)
         self.test_accuracy = Accuracy(task="multiclass", num_classes=10)
@@ -328,7 +336,7 @@ class ImageClassifier(pl.LightningModule):
         return {'loss': test_loss, 'accuracy': acc}
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=0.001)
+        optimizer = torch.optim.Adam(self.parameters(), lr=0.004)
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.5)
         return [optimizer], [scheduler]
 
@@ -356,7 +364,7 @@ transform_test = transforms.Compose([
 ])
 
 val_data = datasets.CIFAR10(root="data", train=False, download=True, transform=transform_test)
-val_loader = DataLoader(val_data, batch_size=16, shuffle=False, num_workers=4)
+val_loader = DataLoader(val_data, batch_size=256, shuffle=False, num_workers=8)
 
 # first image
 sample_data[0][0].resize([300, 300])
@@ -448,6 +456,6 @@ Here's some example of the time that it takes to train a model:
 
 - Hardware: Standard_NC64as_T4_v3 Azure VM, 4 x T4 Nvidia Tesla T4 GPU (16GB)
 - Epochs: 25
-- Time taken: 141 sec
-- Prediction Accuracy: 0.7
-- Test Loss: 0.88
+- Time taken: 32 sec
+- Prediction Accuracy: 0.68
+- Test Loss: 0.92
