@@ -290,7 +290,7 @@ In this lab we are using CIFAR 10 training set with 50000 training 32x32 images,
 Next step is to do the training:
 
 ```py
-train_loader = DataLoader(train_data, batch_size=16, shuffle=True, num_workers=4)
+train_loader = DataLoader(train_data, batch_size=16, shuffle=True, num_workers=4, persistent_workers=True)
 
 # Step 3: Define the Image Classification Model
 class ImageClassifier(pl.LightningModule):

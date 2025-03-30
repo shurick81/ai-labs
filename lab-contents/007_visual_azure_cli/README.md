@@ -228,7 +228,7 @@ to_img(train_data[1][0]).resize([300, 300])
 #third image after transformation
 to_img(train_data[2][0]).resize([300, 300])
 
-train_loader = DataLoader(train_data, batch_size=16, shuffle=True, num_workers=4)
+train_loader = DataLoader(train_data, batch_size=16, shuffle=True, num_workers=4, persistent_workers=True)
 
 # Step 3: Define the Image Classification Model
 class ImageClassifier(pl.LightningModule):
