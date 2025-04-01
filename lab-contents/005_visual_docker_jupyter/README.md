@@ -4,6 +4,8 @@ The only prerequisite for this lab is Docker running. You do NOT need to have in
 
 ## Build a local docker image and run a container
 
+In Macbook:
+
 ```bash
 cat <<'EOF' | tee Dockerfile
 FROM arm64v8/python:3.11.11
@@ -15,6 +17,21 @@ EOF
 docker buildx build --platform=linux/arm64 --progress=plain --no-cache . -t torch-vision
 
 docker run --rm -v $PWD:/usr/src -p 8888:8888 torch-vision /bin/bash -c "jupyter lab --notebook-dir=/usr/src --ip='*' --allow-root"
+```
+
+Or in WSL:
+
+```bash
+cat <<'EOF' | tee Dockerfile
+FROM python:3.11.11
+RUN pip install torchvision==0.21.0
+RUN pip install lightning==2.5.0
+RUN pip install lightning[extra]
+RUN pip install jupyterlab==4.3.6
+EOF
+docker buildx build --platform=linux/amd64 --progress=plain --no-cache . -t torch-vision
+
+docker run --rm -v $(pwd):/usr/src -p 8888:8888 torch-vision /bin/bash -c "jupyter lab --notebook-dir=/usr/src --ip='*' --allow-root"
 ```
 
 In the output, find the Jupyter Lab page (for example, http://localhost:8888/lab?token=497a91de59e60f9441d6a6c22125155d4004e627ef5d199a) and open it in a browser.
@@ -267,5 +284,12 @@ Here's some example of the time that it takes to train a model:
     - Time taken: 6 min 14 sec (374 sec)
     - Prediction Accuracy: 0.7
     - Test Loss: 0.86
+
+- Stand #3
+    - Hardware: HP EliteBook 840 G8 Notebook PC with WSL
+    - Epochs: 25
+    - Time taken: 18 min 05 sec (1085 sec)
+    - Prediction Accuracy: 0.7
+    - Test Loss: 0.89
 
 If such training seems like too long to wait, consider using more powerfull resources, for example GPU-enabled cloud VMs.
