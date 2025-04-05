@@ -12,7 +12,7 @@ In Azure there are a few VM sizes you can choose from when working with ML:
 - Standard_NG8ads_V620_v1, AMD Radeon PRO V620 GPU (32GB), 8-32 GB VRAM, default quota (StandardNGADSV620v1Family) is 0
 - Standard_NV12s_v3, Nvidia Tesla M60 GPU (16GB), 8-32 GB VRAM, default quota (standardNVSv3Family) is 0
 - Standard_NV4as_v4, AMD Instinct MI25 GPU (16GB), minimum VRAM is 2, by default quota is 8, only supporting Windows
-- Standard_NV4ads_V710_v5, AMD Radeon™ Pro V710, minimum VRAM is 4, default quota (StandardNVadsV710v5Family) is 0
+- Standard_NV4ads_V710_v5, AMD Radeon™ Pro V710 (24GB), minimum VRAM is 4, default quota (StandardNVadsV710v5Family) is 0
 - Standard_NV6ads_A10_v5, Nvidia A10 GPU (24GB), minimum VRAM is 2, by default quota is 0
 - Standard_NC24ads_A100_v4, Nvidia PCIe A100 GPU (80GB), minimum VRAM is 80, 
 - Standard_ND96isr_H200_v5, Nvidia H200 GPU (141GB), 1128 GB VRAM, default quota (standardNDISRH200V5Family) is 0
