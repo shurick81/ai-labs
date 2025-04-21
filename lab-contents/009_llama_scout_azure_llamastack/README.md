@@ -56,7 +56,7 @@ llama model download --model-id Llama-4-Scout-17B-16E-Instruct --meta-url \"\$me
 '
 ```
 
-![alt text](image-3.png)
+![Downloading](downloading-00.png)
 
 Example of the full output: [Page](model-download.out)
 
@@ -81,7 +81,7 @@ llama model download --model-id Llama-4-Scout-17B-16E-Instruct --meta-url "$meta
 llama model verify-download --model-id Llama-4-Scout-17B-16E-Instruct;
 ```
 
-![alt text](image.png)
+![Downloading in debug mode](downloading-01.png)
 
 exit
 
@@ -232,7 +232,7 @@ docker run \
 
 After approximately 30 minutes you should expect to see the following output:
 
-![alt text](image-2.png)
+![Starting Server](llama-stack-server-start.png)
 
 Example of the full output: [Page](model-run-01.out)
 
@@ -278,4 +278,4 @@ llama-stack-client --endpoint http://52.143.168.162:8321 \
   --message "What is the difference between ollama and llama-stack?"
 ```
 
-![alt text](image-1.png)
+![Inferencing](inferencing.png)
