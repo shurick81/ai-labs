@@ -236,7 +236,7 @@ After approximately 30 minutes you should expect to see the following output:
 
 Example of the full output: [Page](model-run-01.out)
 
-Then run a container locally on the laptop, after replacing the IP address with the one of your VM:
+Then run on the laptop, after replacing the IP address with the one of your VM:
 
 ```bash
 curl http://52.143.168.162:8321/v1/health
@@ -263,11 +263,13 @@ curl -X 'POST' \
       }'
 ```
 
+Start a container locally:
+
 ```bash
 docker run -it --rm python:3.13.3-bookworm /bin/bash
 ````
 
-Run in the container:
+Run in the container, after replacing the IP address with the one of your VM:
 
 ```bash
 pip install llama-stack-client==0.2.2;
