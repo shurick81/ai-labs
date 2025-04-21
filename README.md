@@ -8,6 +8,19 @@ If you want to run ML tools and their prerequisites/dependencies in your experim
 
 ## First Machine Learning Experiments
 
+| Problem Class | Training/Inference     | Environement | ML Toolset                 | Experiment                                         |
+| -             | -                      | -            | -                          | -                                                  |
+| LLM           | inference              | cloud        | Gemini 1.5                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#trying-llm-google-gemini-15)           |
+| LLM           | inference              | cloud        | Gemini 2.0                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#trying-llm-google-gemini-20)           |
+| LLM           | prompt with image      | cloud        | Gemini 2.0                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#adding-an-image-to-the-request)        |
+| LLM           | inference              | cloud VM     | Llama 4 Scout              | [Page](lab-contents/009_llama_scout_azure_llamastack)        |
+| Tabular       | training and inference | docker       | PyTorch, fastai            | [Section](lab-contents/004_tabular_docker_fastai/README.md#fastai-tabular-training-using-cli)     |
+| Tabular       | training and inference | docker       | PyTorch, fastai, Jupiter   | [Section](lab-contents/004_tabular_docker_fastai/README.md#fastai-tabular-training-using-jupiter) |
+| visual        | training and inference | docker       | PyTorch Lightning, Jupiter | [Page](lab-contents/005_visual_docker_jupyter)     |
+| visual        | training and inference | cloud VM     | PyTorch Lightning, Jupiter | [Page](lab-contents/006_visual_azure_jupyter)      |
+| visual        | training and inference | cloud VM     | PyTorch Lightning, CLI     | [Page](lab-contents/007_visual_azure_cli)      |
+| visual        | training and inference | Macbook      | PyTorch Lightning, Jupiter | [Page](lab-contents/008_visual_macbook_jupyter)      |
+
 ### Ways to Execute ML Training and Inference
 
 First, let's go through some methods of executing the ML processes without preliminary installing prerequisites in your physical environment, like Laptop.
@@ -89,18 +102,3 @@ Examples of Azure VM sizes that can be used for ML training and inference:
 | Standard_ND96isr_H100_v5 | Nvidia H100 80GB | 640 GB | 8 | $127 |
 | Standard_ND96isr_H200_v5 | Nvidia H200 141GB | 1128 GB | 8 | $110 |
 | Standard_ND96isr_MI300X_v5 | AMD MI300X 192GB | 1535 GB | 8 | $67 |
-
-## ML Experiments
-
-| Problem Class | Training/Inference     | Environement | ML Toolset                 | Experiment                                         |
-| -             | -                      | -            | -                          | -                                                  |
-| LLM           | inference              | cloud        | Gemini 1.5                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#trying-llm-google-gemini-15)           |
-| LLM           | inference              | cloud        | Gemini 2.0                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#trying-llm-google-gemini-20)           |
-| LLM           | prompt with image      | cloud        | Gemini 2.0                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#adding-an-image-to-the-request)        |
-| LLM           | inference              | cloud VM     | Llama 4 Scout              | [Page](lab-contents/009_llama_scout_azure_llamastack)        |
-| Tabular       | training and inference | docker       | PyTorch, fastai            | [Section](lab-contents/004_tabular_docker_fastai/README.md#fastai-tabular-training-using-cli)     |
-| Tabular       | training and inference | docker       | PyTorch, fastai, Jupiter   | [Section](lab-contents/004_tabular_docker_fastai/README.md#fastai-tabular-training-using-jupiter) |
-| visual        | training and inference | docker       | PyTorch Lightning, Jupiter | [Page](lab-contents/005_visual_docker_jupyter)     |
-| visual        | training and inference | cloud VM     | PyTorch Lightning, Jupiter | [Page](lab-contents/006_visual_azure_jupyter)      |
-| visual        | training and inference | cloud VM     | PyTorch Lightning, CLI     | [Page](lab-contents/007_visual_azure_cli)      |
-| visual        | training and inference | Macbook      | PyTorch Lightning, Jupiter | [Page](lab-contents/008_visual_macbook_jupyter)      |
