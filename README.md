@@ -102,5 +102,5 @@ Examples of Azure VM sizes that can be used for ML training and inference:
 | Tabular       | training and inference | docker       | PyTorch, fastai, Jupiter   | [Section](lab-contents/004_tabular_docker_fastai/README.md#fastai-tabular-training-using-jupiter) |
 | visual        | training and inference | docker       | PyTorch Lightning, Jupiter | [Page](lab-contents/005_visual_docker_jupyter)     |
 | visual        | training and inference | cloud VM     | PyTorch Lightning, Jupiter | [Page](lab-contents/006_visual_azure_jupyter)      |
-| visual        | training and inference | cloud VM     | PyTorch Lightning, CLI | [Page](lab-contents/007_visual_azure_cli)      |
+| visual        | training and inference | cloud VM     | PyTorch Lightning, CLI     | [Page](lab-contents/007_visual_azure_cli)      |
 | visual        | training and inference | Macbook      | PyTorch Lightning, Jupiter | [Page](lab-contents/008_visual_macbook_jupyter)      |
