@@ -24,34 +24,6 @@ flowchart TB
   laptop-->|Calling API|service
 ```
 
-Examples of LLM models and their requirements:
-
-| LLM Model | VRAM required |
-| - | - |
-| DeepSeek-R1-Distill-Qwen-1.5B | 1 GB |
-| Llama 3.2 3b-instruct-fp16 | 6.4 GB |
-| Llama 3.3 70b-instruct-fp16 | 160 GB |
-| Llama 4 Scout | 210 GB |
-| Mistral-Large-Instruct-2407 | 250 GB |
-| Llama 4 Maverick | 790 GB |
-| Llama 3.1 405b | 930GB |
-| DeepSeek-R1 | 1500 GB |
-
-Examples of Azure VM sizes that can be used for ML training and inference:
-
-| VM Size | GPU Type | GPU Memory | GPUs | Price per Hour |
-| - | - | - | - | - |
-| Standard_NC4as_T4_v3 | Nvidia T4 | 16 GB | 1 | $0.6 |
-| Standard_NC64as_T4_v3 | Nvidia T4 | 64 GB | 4 | $5 |
-| Standard_NC24ads_A100_v4 | Nvidia A100 80GB | 80 GB | 1 | $4.6 |
-| Standard_NC40ads_H100_v5 | Nvidia H100 94GB | 94 GB | 1 | $9 |
-| Standard_NC48ads_A100_v4 | Nvidia A100 80GB | 160 GB | 2 | $9 |
-| Standard_NC80adis_H100_v5 | Nvidia H100 94GB | 188 GB | 2 | $14 |
-| Standard_NC96ads_A100_v4 | Nvidia A100 80GB | 320 GB | 4 | $20 |
-| Standard_ND96isr_H100_v5 | Nvidia H100 80GB | 640 GB | 8 | $127 |
-| Standard_ND96isr_H200_v5 | Nvidia H200 141GB | 1128 GB | 8 | $110 |
-| Standard_ND96isr_MI300X_v5 | AMD MI300X 192GB | 1535 GB | 8 | $67 |
-
 #### Using Docker
 
 Use container images that already have such preinstalled software as Python, PyTorch, fastai, Pandas, Jupiter, etc.
@@ -89,6 +61,34 @@ flowchart TB
 ```
 
 Prerequisite for using this approach is having installed tools for remote control of Cloud provider such as Azure.
+
+Examples of LLM models and their requirements:
+
+| LLM Model | VRAM required |
+| - | - |
+| DeepSeek-R1-Distill-Qwen-1.5B | 1 GB |
+| Llama 3.2 3b-instruct-fp16 | 6.4 GB |
+| Llama 3.3 70b-instruct-fp16 | 160 GB |
+| Llama 4 Scout | 210 GB |
+| Mistral-Large-Instruct-2407 | 250 GB |
+| Llama 4 Maverick | 790 GB |
+| Llama 3.1 405b | 930GB |
+| DeepSeek-R1 | 1500 GB |
+
+Examples of Azure VM sizes that can be used for ML training and inference:
+
+| VM Size | GPU Type | GPU Memory | GPUs | Price per Hour |
+| - | - | - | - | - |
+| Standard_NC4as_T4_v3 | Nvidia T4 | 16 GB | 1 | $0.6 |
+| Standard_NC64as_T4_v3 | Nvidia T4 | 64 GB | 4 | $5 |
+| Standard_NC24ads_A100_v4 | Nvidia A100 80GB | 80 GB | 1 | $4.6 |
+| Standard_NC40ads_H100_v5 | Nvidia H100 94GB | 94 GB | 1 | $9 |
+| Standard_NC48ads_A100_v4 | Nvidia A100 80GB | 160 GB | 2 | $9 |
+| Standard_NC80adis_H100_v5 | Nvidia H100 94GB | 188 GB | 2 | $14 |
+| Standard_NC96ads_A100_v4 | Nvidia A100 80GB | 320 GB | 4 | $20 |
+| Standard_ND96isr_H100_v5 | Nvidia H100 80GB | 640 GB | 8 | $127 |
+| Standard_ND96isr_H200_v5 | Nvidia H200 141GB | 1128 GB | 8 | $110 |
+| Standard_ND96isr_MI300X_v5 | AMD MI300X 192GB | 1535 GB | 8 | $67 |
 
 | Problem Class | Training/Inference     | Environement | ML Toolset                 | Experiment                                         |
 | -             | -                      | -            | -                          | -                                                  |
