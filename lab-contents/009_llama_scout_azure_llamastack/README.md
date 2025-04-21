@@ -236,6 +236,12 @@ After approximately 30 minutes you should expect to see the following output:
 
 Example of the full output: [Page](model-run-01.out)
 
+Now show the IP address of the VM:
+
+```bash
+az vm list-ip-addresses --resource-group ai-labs-01 --name medium_nvidia --query [].virtualMachine.network.publicIpAddresses[].ipAddress -o tsv
+```
+
 Then run on the laptop, after replacing the IP address with the one of your VM:
 
 ```bash
