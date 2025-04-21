@@ -1,0 +1,183 @@
+INFO     2025-04-20 11:24:21,564 __main__:385 server: Using template meta-reference-gpu config file:                    
+         /usr/local/lib/python3.10/site-packages/llama_stack/templates/meta-reference-gpu/run.yaml                      
+INFO     2025-04-20 11:24:21,567 __main__:387 server: Run configuration:                                                
+INFO     2025-04-20 11:24:21,575 __main__:389 server: apis:                                                             
+         - agents                                                                                                       
+         - datasetio                                                                                                    
+         - eval                                                                                                         
+         - inference                                                                                                    
+         - safety                                                                                                       
+         - scoring                                                                                                      
+         - telemetry                                                                                                    
+         - tool_runtime                                                                                                 
+         - vector_io                                                                                                    
+         benchmarks: []                                                                                                 
+         container_image: null                                                                                          
+         datasets: []                                                                                                   
+         external_providers_dir: null                                                                                   
+         image_name: meta-reference-gpu                                                                                 
+         logging: null                                                                                                  
+         metadata_store:                                                                                                
+           db_path: /root/.llama/distributions/meta-reference-gpu/registry.db                                           
+           namespace: null                                                                                              
+           type: sqlite                                                                                                 
+         models:                                                                                                        
+         - metadata: {}                                                                                                 
+           model_id: meta-llama/Llama-4-Scout-17B-16E-Instruct                                                          
+           model_type: !!python/object/apply:llama_stack.apis.models.models.ModelType                                   
+           - llm                                                                                                        
+           provider_id: meta-reference-inference                                                                        
+           provider_model_id: null                                                                                      
+         - metadata:                                                                                                    
+             embedding_dimension: 384                                                                                   
+           model_id: all-MiniLM-L6-v2                                                                                   
+           model_type: !!python/object/apply:llama_stack.apis.models.models.ModelType                                   
+           - embedding                                                                                                  
+           provider_id: sentence-transformers                                                                           
+           provider_model_id: null                                                                                      
+         providers:                                                                                                     
+           agents:                                                                                                      
+           - config:                                                                                                    
+               persistence_store:                                                                                       
+                 db_path: /root/.llama/distributions/meta-reference-gpu/agents_store.db                                 
+                 namespace: null                                                                                        
+                 type: sqlite                                                                                           
+             provider_id: meta-reference                                                                                
+             provider_type: inline::meta-reference                                                                      
+           datasetio:                                                                                                   
+           - config:                                                                                                    
+               kvstore:                                                                                                 
+                 db_path: /root/.llama/distributions/meta-reference-gpu/huggingface_datasetio.db                        
+                 namespace: null                                                                                        
+                 type: sqlite                                                                                           
+             provider_id: huggingface                                                                                   
+             provider_type: remote::huggingface                                                                         
+           - config:                                                                                                    
+               kvstore:                                                                                                 
+                 db_path: /root/.llama/distributions/meta-reference-gpu/localfs_datasetio.db                            
+                 namespace: null                                                                                        
+                 type: sqlite                                                                                           
+             provider_id: localfs                                                                                       
+             provider_type: inline::localfs                                                                             
+           eval:                                                                                                        
+           - config:                                                                                                    
+               kvstore:                                                                                                 
+                 db_path: /root/.llama/distributions/meta-reference-gpu/meta_reference_eval.db                          
+                 namespace: null                                                                                        
+                 type: sqlite                                                                                           
+             provider_id: meta-reference                                                                                
+             provider_type: inline::meta-reference                                                                      
+           inference:                                                                                                   
+           - config:                                                                                                    
+               checkpoint_dir: 'null'                                                                                   
+               max_batch_size: '1'                                                                                      
+               max_seq_len: '4096'                                                                                      
+               model: meta-llama/Llama-4-Scout-17B-16E-Instruct                                                         
+               model_parallel_size: '4'                                                                                 
+               quantization:                                                                                            
+                 type: bf16                                                                                             
+             provider_id: meta-reference-inference                                                                      
+             provider_type: inline::meta-reference                                                                      
+           - config: {}                                                                                                 
+             provider_id: sentence-transformers                                                                         
+             provider_type: inline::sentence-transformers                                                               
+           safety:                                                                                                      
+           - config:                                                                                                    
+               excluded_categories: []                                                                                  
+             provider_id: llama-guard                                                                                   
+             provider_type: inline::llama-guard                                                                         
+           scoring:                                                                                                     
+           - config: {}                                                                                                 
+             provider_id: basic                                                                                         
+             provider_type: inline::basic                                                                               
+           - config: {}                                                                                                 
+             provider_id: llm-as-judge                                                                                  
+             provider_type: inline::llm-as-judge                                                                        
+           - config:                                                                                                    
+               openai_api_key: '********'                                                                               
+             provider_id: braintrust                                                                                    
+             provider_type: inline::braintrust                                                                          
+           telemetry:                                                                                                   
+           - config:                                                                                                    
+               service_name: "\u200B"                                                                                   
+               sinks: console,sqlite                                                                                    
+               sqlite_db_path: /root/.llama/distributions/meta-reference-gpu/trace_store.db                             
+             provider_id: meta-reference                                                                                
+             provider_type: inline::meta-reference                                                                      
+           tool_runtime:                                                                                                
+           - config:                                                                                                    
+               api_key: '********'                                                                                      
+               max_results: 3                                                                                           
+             provider_id: brave-search                                                                                  
+             provider_type: remote::brave-search                                                                        
+           - config:                                                                                                    
+               api_key: '********'                                                                                      
+               max_results: 3                                                                                           
+             provider_id: tavily-search                                                                                 
+             provider_type: remote::tavily-search                                                                       
+           - config: {}                                                                                                 
+             provider_id: code-interpreter                                                                              
+             provider_type: inline::code-interpreter                                                                    
+           - config: {}                                                                                                 
+             provider_id: rag-runtime                                                                                   
+             provider_type: inline::rag-runtime                                                                         
+           - config: {}                                                                                                 
+             provider_id: model-context-protocol                                                                        
+             provider_type: remote::model-context-protocol                                                              
+           vector_io:                                                                                                   
+           - config:                                                                                                    
+               kvstore:                                                                                                 
+                 db_path: /root/.llama/distributions/meta-reference-gpu/faiss_store.db                                  
+                 namespace: null                                                                                        
+                 type: sqlite                                                                                           
+             provider_id: faiss                                                                                         
+             provider_type: inline::faiss                                                                               
+         scoring_fns: []                                                                                                
+         server:                                                                                                        
+           auth: null                                                                                                   
+           port: 8321                                                                                                   
+           tls_certfile: null                                                                                           
+           tls_keyfile: null                                                                                            
+         shields: []                                                                                                    
+         tool_groups:                                                                                                   
+         - args: null                                                                                                   
+           mcp_endpoint: null                                                                                           
+           provider_id: tavily-search                                                                                   
+           toolgroup_id: builtin::websearch                                                                             
+         - args: null                                                                                                   
+           mcp_endpoint: null                                                                                           
+           provider_id: rag-runtime                                                                                     
+           toolgroup_id: builtin::rag                                                                                   
+         - args: null                                                                                                   
+           mcp_endpoint: null                                                                                           
+           provider_id: code-interpreter                                                                                
+           toolgroup_id: builtin::code_interpreter                                                                      
+         vector_dbs: []                                                                                                 
+         version: '2'                                                                                                   
+                                                                                                                        
+INFO     2025-04-20 11:25:42,291 llama_stack.providers.inline.inference.meta_reference.inference:140 inference: Loading 
+         model `meta-llama/Llama-4-Scout-17B-16E-Instruct`                                                              
+/usr/local/lib/python3.10/site-packages/torch/__init__.py:1236: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /pytorch/torch/csrc/tensor/python_tensor.cpp:434.)
+  _C._set_default_tensor_type(t)
+/usr/local/lib/python3.10/site-packages/torch/__init__.py:1236: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /pytorch/torch/csrc/tensor/python_tensor.cpp:434.)
+  _C._set_default_tensor_type(t)
+/usr/local/lib/python3.10/site-packages/torch/__init__.py:1236: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /pytorch/torch/csrc/tensor/python_tensor.cpp:434.)
+  _C._set_default_tensor_type(t)
+/usr/local/lib/python3.10/site-packages/torch/__init__.py:1236: UserWarning: torch.set_default_tensor_type() is deprecated as of PyTorch 2.1, please use torch.set_default_dtype() and torch.set_default_device() as alternatives. (Triggered internally at /pytorch/torch/csrc/tensor/python_tensor.cpp:434.)
+  _C._set_default_tensor_type(t)
+ [rank0]:[W420 11:47:51.574216472 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W420 11:47:51.012786175 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W420 11:47:52.151899177 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W420 11:47:53.295091759 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+INFO     2025-04-20 11:47:55,980 llama_stack.providers.inline.inference.meta_reference.parallel_utils:300 uncategorized:
+         Loaded model...                                                                                                
+INFO     2025-04-20 11:47:55,982 llama_stack.providers.inline.inference.meta_reference.inference:162 inference: Warming 
+         up...                                                                                                          
+INFO     2025-04-20 11:48:08,347 llama_stack.providers.inline.inference.meta_reference.inference:173 inference: Warmed  
+         up!                                                                                                            
+INFO     2025-04-20 11:48:08,575 __main__:478 server: Listening on ['::', '0.0.0.0']:8321                               
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO     2025-04-20 11:48:08,672 __main__:148 server: Starting up                                                       
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://['::', '0.0.0.0']:8321 (Press CTRL+C to quit)

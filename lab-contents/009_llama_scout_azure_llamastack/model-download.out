@@ -1,0 +1,214 @@
+Collecting llama-stack
+  Downloading llama_stack-0.2.2-py3-none-any.whl.metadata (18 kB)
+Collecting blobfile (from llama-stack)
+  Downloading blobfile-3.0.0-py3-none-any.whl.metadata (15 kB)
+Collecting fire (from llama-stack)
+  Downloading fire-0.7.0.tar.gz (87 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting httpx (from llama-stack)
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting huggingface-hub (from llama-stack)
+  Downloading huggingface_hub-0.30.2-py3-none-any.whl.metadata (13 kB)
+Collecting jinja2>=3.1.6 (from llama-stack)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting jsonschema (from llama-stack)
+  Downloading jsonschema-4.23.0-py3-none-any.whl.metadata (7.9 kB)
+Collecting llama-stack-client>=0.2.2 (from llama-stack)
+  Downloading llama_stack_client-0.2.2-py3-none-any.whl.metadata (15 kB)
+Collecting openai>=1.66 (from llama-stack)
+  Downloading openai-1.75.0-py3-none-any.whl.metadata (25 kB)
+Collecting prompt-toolkit (from llama-stack)
+  Downloading prompt_toolkit-3.0.51-py3-none-any.whl.metadata (6.4 kB)
+Collecting python-dotenv (from llama-stack)
+  Downloading python_dotenv-1.1.0-py3-none-any.whl.metadata (24 kB)
+Collecting pydantic>=2 (from llama-stack)
+  Downloading pydantic-2.11.3-py3-none-any.whl.metadata (65 kB)
+Collecting requests (from llama-stack)
+  Downloading requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+Collecting rich (from llama-stack)
+  Downloading rich-14.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting setuptools (from llama-stack)
+  Using cached setuptools-78.1.1-py3-none-any.whl.metadata (6.5 kB)
+Collecting termcolor (from llama-stack)
+  Downloading termcolor-3.0.1-py3-none-any.whl.metadata (6.1 kB)
+Collecting tiktoken (from llama-stack)
+  Downloading tiktoken-0.9.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting pillow (from llama-stack)
+  Downloading pillow-11.2.1-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (8.9 kB)
+Collecting MarkupSafe>=2.0 (from jinja2>=3.1.6->llama-stack)
+  Downloading MarkupSafe-3.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+Collecting anyio<5,>=3.5.0 (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting click (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+Collecting distro<2,>=1.7.0 (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting pandas (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading pandas-2.2.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (89 kB)
+Collecting pyaml (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading pyaml-25.1.0-py3-none-any.whl.metadata (12 kB)
+Collecting sniffio (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting tqdm (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Collecting typing-extensions<5,>=4.7 (from llama-stack-client>=0.2.2->llama-stack)
+  Downloading typing_extensions-4.13.2-py3-none-any.whl.metadata (3.0 kB)
+Collecting certifi (from httpx->llama-stack)
+  Downloading certifi-2025.1.31-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx->llama-stack)
+  Downloading httpcore-1.0.8-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx->llama-stack)
+  Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+Collecting h11<0.15,>=0.13 (from httpcore==1.*->httpx->llama-stack)
+  Downloading h11-0.14.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting jiter<1,>=0.4.0 (from openai>=1.66->llama-stack)
+  Downloading jiter-0.9.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2->llama-stack)
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.33.1 (from pydantic>=2->llama-stack)
+  Downloading pydantic_core-2.33.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+Collecting typing-inspection>=0.4.0 (from pydantic>=2->llama-stack)
+  Downloading typing_inspection-0.4.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting pycryptodomex>=3.8 (from blobfile->llama-stack)
+  Downloading pycryptodomex-3.22.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.4 kB)
+Collecting urllib3<3,>=1.25.3 (from blobfile->llama-stack)
+  Downloading urllib3-2.4.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting lxml>=4.9 (from blobfile->llama-stack)
+  Downloading lxml-5.3.2-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (3.6 kB)
+Collecting filelock>=3.0 (from blobfile->llama-stack)
+  Downloading filelock-3.18.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting fsspec>=2023.5.0 (from huggingface-hub->llama-stack)
+  Downloading fsspec-2025.3.2-py3-none-any.whl.metadata (11 kB)
+Collecting packaging>=20.9 (from huggingface-hub->llama-stack)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pyyaml>=5.1 (from huggingface-hub->llama-stack)
+  Downloading PyYAML-6.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+Collecting attrs>=22.2.0 (from jsonschema->llama-stack)
+  Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema->llama-stack)
+  Downloading jsonschema_specifications-2024.10.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting referencing>=0.28.4 (from jsonschema->llama-stack)
+  Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.7.1 (from jsonschema->llama-stack)
+  Downloading rpds_py-0.24.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting wcwidth (from prompt-toolkit->llama-stack)
+  Downloading wcwidth-0.2.13-py2.py3-none-any.whl.metadata (14 kB)
+Collecting charset-normalizer<4,>=2 (from requests->llama-stack)
+  Downloading charset_normalizer-3.4.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+Collecting markdown-it-py>=2.2.0 (from rich->llama-stack)
+  Downloading markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+Collecting pygments<3.0.0,>=2.13.0 (from rich->llama-stack)
+  Downloading pygments-2.19.1-py3-none-any.whl.metadata (2.5 kB)
+Collecting regex>=2022.1.18 (from tiktoken->llama-stack)
+  Downloading regex-2024.11.6-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (40 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->llama-stack)
+  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Collecting numpy>=1.26.0 (from pandas->llama-stack-client>=0.2.2->llama-stack)
+  Downloading numpy-2.2.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+Collecting python-dateutil>=2.8.2 (from pandas->llama-stack-client>=0.2.2->llama-stack)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas->llama-stack-client>=0.2.2->llama-stack)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas->llama-stack-client>=0.2.2->llama-stack)
+  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas->llama-stack-client>=0.2.2->llama-stack)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading llama_stack-0.2.2-py3-none-any.whl (3.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.7/3.7 MB 52.4 MB/s eta 0:00:00
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading llama_stack_client-0.2.2-py3-none-any.whl (273 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading httpcore-1.0.8-py3-none-any.whl (78 kB)
+Downloading openai-1.75.0-py3-none-any.whl (646 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 647.0/647.0 kB 26.0 MB/s eta 0:00:00
+Downloading pydantic-2.11.3-py3-none-any.whl (443 kB)
+Downloading pydantic_core-2.33.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 62.7 MB/s eta 0:00:00
+Downloading blobfile-3.0.0-py3-none-any.whl (75 kB)
+Downloading huggingface_hub-0.30.2-py3-none-any.whl (481 kB)
+Downloading jsonschema-4.23.0-py3-none-any.whl (88 kB)
+Downloading pillow-11.2.1-cp313-cp313-manylinux_2_28_x86_64.whl (4.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 44.6 MB/s eta 0:00:00
+Downloading prompt_toolkit-3.0.51-py3-none-any.whl (387 kB)
+Downloading python_dotenv-1.1.0-py3-none-any.whl (20 kB)
+Downloading requests-2.32.3-py3-none-any.whl (64 kB)
+Downloading rich-14.0.0-py3-none-any.whl (243 kB)
+Using cached setuptools-78.1.1-py3-none-any.whl (1.3 MB)
+Downloading termcolor-3.0.1-py3-none-any.whl (7.2 kB)
+Downloading tiktoken-0.9.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 45.6 MB/s eta 0:00:00
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
+Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+Downloading certifi-2025.1.31-py3-none-any.whl (166 kB)
+Downloading charset_normalizer-3.4.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (144 kB)
+Downloading distro-1.9.0-py3-none-any.whl (20 kB)
+Downloading filelock-3.18.0-py3-none-any.whl (16 kB)
+Downloading fsspec-2025.3.2-py3-none-any.whl (194 kB)
+Downloading idna-3.10-py3-none-any.whl (70 kB)
+Downloading jiter-0.9.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (352 kB)
+Downloading jsonschema_specifications-2024.10.1-py3-none-any.whl (18 kB)
+Downloading lxml-5.3.2-cp313-cp313-manylinux_2_28_x86_64.whl (5.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 106.7 MB/s eta 0:00:00
+Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+Downloading MarkupSafe-3.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Downloading pycryptodomex-3.22.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 65.2 MB/s eta 0:00:00
+Downloading pygments-2.19.1-py3-none-any.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 50.4 MB/s eta 0:00:00
+Downloading PyYAML-6.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (759 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 759.5/759.5 kB 26.8 MB/s eta 0:00:00
+Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+Downloading regex-2024.11.6-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (796 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 796.9/796.9 kB 34.0 MB/s eta 0:00:00
+Downloading rpds_py-0.24.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (393 kB)
+Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+Downloading typing_extensions-4.13.2-py3-none-any.whl (45 kB)
+Downloading typing_inspection-0.4.0-py3-none-any.whl (14 kB)
+Downloading urllib3-2.4.0-py3-none-any.whl (128 kB)
+Downloading click-8.1.8-py3-none-any.whl (98 kB)
+Downloading pandas-2.2.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 128.9 MB/s eta 0:00:00
+Downloading pyaml-25.1.0-py3-none-any.whl (26 kB)
+Downloading wcwidth-0.2.13-py2.py3-none-any.whl (34 kB)
+Downloading h11-0.14.0-py3-none-any.whl (58 kB)
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Downloading numpy-2.2.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.1/16.1 MB 123.0 MB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Building wheels for collected packages: fire
+  Building wheel for fire (pyproject.toml): started
+  Building wheel for fire (pyproject.toml): finished with status 'done'
+  Created wheel for fire: filename=fire-0.7.0-py3-none-any.whl size=114330 sha256=f92c2bdedb2c519b1be07c45a232784af6e09ab4532517eaf376df9a51814e46
+  Stored in directory: /root/.cache/pip/wheels/92/61/3f/600cf4d91dac9f979f4648ca6db99ed6d9fc762abc6f06b2b5
+Successfully built fire
+Installing collected packages: wcwidth, pytz, urllib3, tzdata, typing-extensions, tqdm, termcolor, sniffio, six, setuptools, rpds-py, regex, pyyaml, python-dotenv, pygments, pycryptodomex, prompt-toolkit, pillow, packaging, numpy, mdurl, MarkupSafe, lxml, jiter, idna, h11, fsspec, filelock, distro, click, charset-normalizer, certifi, attrs, annotated-types, typing-inspection, requests, referencing, python-dateutil, pydantic-core, pyaml, markdown-it-py, jinja2, httpcore, fire, blobfile, anyio, tiktoken, rich, pydantic, pandas, jsonschema-specifications, huggingface-hub, httpx, openai, llama-stack-client, jsonschema, llama-stack
+Successfully installed MarkupSafe-3.0.2 annotated-types-0.7.0 anyio-4.9.0 attrs-25.3.0 blobfile-3.0.0 certifi-2025.1.31 charset-normalizer-3.4.1 click-8.1.8 distro-1.9.0 filelock-3.18.0 fire-0.7.0 fsspec-2025.3.2 h11-0.14.0 httpcore-1.0.8 httpx-0.28.1 huggingface-hub-0.30.2 idna-3.10 jinja2-3.1.6 jiter-0.9.0 jsonschema-4.23.0 jsonschema-specifications-2024.10.1 llama-stack-0.2.2 llama-stack-client-0.2.2 lxml-5.3.2 markdown-it-py-3.0.0 mdurl-0.1.2 numpy-2.2.5 openai-1.75.0 packaging-25.0 pandas-2.2.3 pillow-11.2.1 prompt-toolkit-3.0.51 pyaml-25.1.0 pycryptodomex-3.22.0 pydantic-2.11.3 pydantic-core-2.33.1 pygments-2.19.1 python-dateutil-2.9.0.post0 python-dotenv-1.1.0 pytz-2025.2 pyyaml-6.0.2 referencing-0.36.2 regex-2024.11.6 requests-2.32.3 rich-14.0.0 rpds-py-0.24.0 setuptools-78.1.1 six-1.17.0 sniffio-1.3.1 termcolor-3.0.1 tiktoken-0.9.0 tqdm-4.67.1 typing-extensions-4.13.2 typing-inspection-0.4.0 tzdata-2025.2 urllib3-2.4.0 wcwidth-0.2.13
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Downloading checklist.chk       ━━━━━━━━━━━━━━━━━ 100.0% 528/528 bytes - 0:00:00
+Downloading tokenizer.model     ━━━━━━━━━━━━━━━━━ 100.0% 3.6/3.6 MB    - 0:00:00
+Downloading params.json         ━━━━━━━━━━━━━━━━━ 100.0% 831/831 bytes - 0:00:00
+Downloading consolidated.00.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.01.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.02.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.03.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.04.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.05.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.06.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+Downloading consolidated.07.pth ━━━━━━━━━━━━━━━━━ 100.0% 27.2/27.2 GB  - 0:00:00
+
+Successfully downloaded model to /root/.llama/checkpoints/Llama-4-Scout-17B-16E-Instruct
+
+View MD5 checksum files at: /root/.llama/checkpoints/Llama-4-Scout-17B-16E-Instruct/checklist.chk
+
+[Optionally] To run MD5 checksums, use the following command: llama model verify-download --model-id Llama-4-Scout-17B-16E-Instruct
