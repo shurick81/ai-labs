@@ -27,9 +27,10 @@ flowchart TB
 Examples of LLM models and their requirements:
 
 | LLM Model | VRAM required |
+| - | - |
 | DeepSeek-R1-Distill-Qwen-1.5B | 1 GB |
-| Llama 3.2 3b-instruct-fp16 | 6.4GB |
-| Llama 3.3 70b-instruct-fp16 | 160GB |
+| Llama 3.2 3b-instruct-fp16 | 6.4 GB |
+| Llama 3.3 70b-instruct-fp16 | 160 GB |
 | Llama 4 Scout | 210 GB |
 | Mistral-Large-Instruct-2407 | 250 GB |
 | Llama 4 Maverick | 790 GB |
