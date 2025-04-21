@@ -1,4 +1,4 @@
-# Image recognition using a Cloud VM
+# Running Llama Scout using a Cloud VM
 
 When a task is too resource consuming for running on your laptop, you can hire a VM in the cloud. There might be a few options.
 
