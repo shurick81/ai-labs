@@ -102,3 +102,5 @@ Examples of Azure VM sizes that can be used for ML training and inference:
 | Standard_ND96isr_H100_v5 | Nvidia H100 80GB | 640 GB | 8 | $127 |
 | Standard_ND96isr_H200_v5 | Nvidia H200 141GB | 1128 GB | 8 | $110 |
 | Standard_ND96isr_MI300X_v5 | AMD MI300X 192GB | 1535 GB | 8 | $67 |
+
+![Repo QR Link](qr.png)
