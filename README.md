@@ -90,6 +90,8 @@ Examples of Azure VM sizes that can be used for ML training and inference:
 | Standard_ND96isr_H200_v5 | Nvidia H200 141GB | 1128 GB | 8 | $110 |
 | Standard_ND96isr_MI300X_v5 | AMD MI300X 192GB | 1535 GB | 8 | $67 |
 
+## ML Experiments
+
 | Problem Class | Training/Inference     | Environement | ML Toolset                 | Experiment                                         |
 | -             | -                      | -            | -                          | -                                                  |
 | LLM           | inference              | cloud        | Gemini 1.5                 | [Section](lab-contents/003_llm_cloud_gemini/README.md#trying-llm-google-gemini-15)           |
