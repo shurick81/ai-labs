@@ -255,7 +255,7 @@ curl -X 'POST' \
             "content": [
               {
                 "type": "text",
-                "text": "hich number is bigger: 99 or 5 in power of 99?"
+                "text": "Which number is bigger: 99 or 5 in power of 99?"
               }
             ]
           }
