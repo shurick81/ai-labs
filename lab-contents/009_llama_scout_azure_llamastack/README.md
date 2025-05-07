@@ -142,12 +142,12 @@ then run
 ```bash
 start_time=$(date +%s.%N);  # Capture start time
 az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "sudo usermod -aG docker admin98475897";
-az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem docker pull llamastack/distribution-meta-reference-gpu;
+az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem docker pull llamastack/distribution-meta-reference-gpu:0.2.5;
 az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "docker run --rm --gpus all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -benchmark";
 end_time=$(date +%s.%N);  # Capture end time
 elapsed_time=$(awk "BEGIN {print $end_time - $start_time}");
 echo "Elapsed time: $elapsed_time seconds";
-# 450-465 sec
+# 150-160 sec
 ```
 
 expected output:
@@ -217,16 +217,24 @@ then run
 
 ```bash
 az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "
+docker run --rm --gpus all nvidia/cuda:12.9.0-runtime-ubuntu24.04 nvidia-smi
+"
+
+az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "
+docker run --rm --gpus all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -benchmark
+"
+
+az ssh vm --resource-group ai-labs-01 --name medium_nvidia --local-user admin98475897 --private-key-file ~/.ssh/id_rsa.pem "
 docker run \
   --rm \
   -p 8321:8321 \
   -v /data/.llama:/root/.llama \
-  --gpus all \
+  --gpus '\"device=0,1,2,3\"' \
   --shm-size=16g \
   --env INFERENCE_MODEL=meta-llama/Llama-4-Scout-17B-16E-Instruct \
   --env MODEL_PARALLEL_SIZE=4 \
   --env LLAMA_STACK_LOG=debug \
-  llamastack/distribution-meta-reference-gpu:0.2.2;
+  llamastack/distribution-meta-reference-gpu:0.2.5;
 "
 ```
 
@@ -249,8 +257,8 @@ curl http://52.143.168.162:8321/v1/health
 
 curl http://52.143.168.162:8321/v1/models
 
-curl -X 'POST' \
-  'http://52.143.168.162:8321/v1/inference/chat-completion' \
+curl -X POST \
+  http://52.143.168.162:8321/v1/inference/chat-completion \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
